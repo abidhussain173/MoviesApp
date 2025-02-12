@@ -12,9 +12,8 @@ const VideoPlayerScreen: React.FC<Props> = ({ navigation, route }) => {
     const { trailerUrl } = route.params;
     const videoRef = useRef<any>(null);
 
-    // Handle video end event
     const handleVideoEnd = () => {
-        navigation.goBack(); // Navigate back to the detail screen
+        navigation.goBack();
     };
 
     return (
@@ -25,7 +24,7 @@ const VideoPlayerScreen: React.FC<Props> = ({ navigation, route }) => {
                 style={styles.videoPlayer}
                 controls={true}
                 fullscreen={true}
-                onEnd={handleVideoEnd} // Automatically navigate back when video ends
+                onEnd={handleVideoEnd}
             />
             <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
                 <BackIcon name="close" color={"white"} size={30} />
