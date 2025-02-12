@@ -25,7 +25,9 @@ const SearchResultScreen: React.FC<Props> = ({ route, navigation }) => {
     const renderItem = ({ item }: { item: Movie }) => (
         <View key={item.id.toString()} style={styles.searchCardItem}>
             <View style={styles.searchImgContainer}>
-                <TouchableOpacity style={styles.searchCard}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('MovieDetail')}
+                    style={styles.searchCard}>
                     <Image
                         source={{ uri: `${image_base_url}${item.backdrop_path}` }}
                         style={styles.searchImage}
