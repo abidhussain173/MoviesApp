@@ -15,7 +15,7 @@ type Props = {
 const MovieDetailScreen: React.FC<Props> = ({ navigation, route }) => {
     const { itemData } = route.params
     const { id, poster_path, backdrop_path, overview, release_date, title, genre_ids } = itemData;
-    const [trailerUrl, setTrailerUrl] = useState<string | null>(null);
+    const [trailerId, setTrailerId] = useState<string | null>(null);
     const formattedDate = new Date(release_date).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
@@ -34,8 +34,7 @@ const MovieDetailScreen: React.FC<Props> = ({ navigation, route }) => {
             const data = response?.data
             const trailer = data.results.find((video: any) => video.type === 'Trailer');
             if (trailer) {
-                console.log("trailer", trailer?.key)
-                setTrailerUrl(`https://www.youtube.com/embed/${trailer.key}`);
+                setTrailerId(trailer.key);
             }
         } catch (error) {
             console.error('Error fetching trailer:', error);
@@ -43,8 +42,8 @@ const MovieDetailScreen: React.FC<Props> = ({ navigation, route }) => {
     };
 
     const openTrailer = () => {
-        if (trailerUrl) {
-            navigation.navigate('VideoPlayerScreen', { trailerUrl });
+        if (trailerId) {
+            navigation.navigate('VideoPlayerScreen', { trailerId });
         } else {
             console.log('No trailer available for this movie.');
         }

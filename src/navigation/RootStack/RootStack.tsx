@@ -7,6 +7,8 @@ import MovieDetailScreen from '../../screens/MovieDetailScreen/MovieDetailScreen
 import TicketsSelectionScreen from '../../screens/TicketsSelectionScreen/TicketsSelectionScreen';
 import SeatSelectionScreen from '../../screens/SeatsSelectionScreen/SeatSelectionScreen';
 import VideoPlayerScreen from '../../screens/VideoPlayerScreen/VideoPlayerScreen';
+import SearchScreen from '../../screens/SearchScreens/SearchScreen';
+import SearchResultScreen from '../../screens/SearchScreens/SearchResultScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -18,8 +20,8 @@ const RootStack: React.FC = () => {
             <Stack.Screen name="TicketsSelection" component={TicketsSelectionScreen} />
             <Stack.Screen name="SeatSelectionScreen" component={SeatSelectionScreen} />
             <Stack.Screen name="VideoPlayerScreen" component={VideoPlayerScreen} />
-            {/* <Stack.Screen name="MovieDetail" component={MovieDetailScreen} />
-            <Stack.Screen name="MovieDetail" component={MovieDetailScreen} /> */}
+            <Stack.Screen name="SearchScreen" component={SearchScreen} />
+            <Stack.Screen name="SearchResultScreen" component={SearchResultScreen} />
         </Stack.Navigator>
     )
 }

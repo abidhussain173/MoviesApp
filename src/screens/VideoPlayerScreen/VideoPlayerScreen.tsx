@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import Video from 'react-native-video';
+import YoutubePlayer from 'react-native-youtube-iframe';
 import BackIcon from 'react-native-vector-icons/Ionicons';
 
 type Props = {
@@ -9,22 +9,24 @@ type Props = {
 };
 
 const VideoPlayerScreen: React.FC<Props> = ({ navigation, route }) => {
-    const { trailerUrl } = route.params;
-    const videoRef = useRef<any>(null);
-
+    const { trailerId } = route.params;
+    console.log("trailerId", trailerId)
+    const [isPlaying, setIsPlaying] = useState(true);
     const handleVideoEnd = () => {
         navigation.goBack();
     };
 
     return (
         <View style={styles.container}>
-            <Video
-                ref={videoRef}
-                source={{ uri: trailerUrl }}
-                style={styles.videoPlayer}
-                controls={true}
-                fullscreen={true}
-                onEnd={handleVideoEnd}
+            <YoutubePlayer
+                height={300}
+                play={isPlaying}
+                videoId={trailerId}
+                onChangeState={(event) => {
+                    if (event === 'ended') {
+                        handleVideoEnd();
+                    }
+                }}
             />
             <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
                 <BackIcon name="close" color={"white"} size={30} />
@@ -39,10 +41,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'black',
-    },
-    videoPlayer: {
-        width: '100%',
-        height: '100%',
+        justifyContent: 'center',
     },
     closeButton: {
         position: 'absolute',

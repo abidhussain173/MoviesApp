@@ -4,6 +4,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Movie } from './dataTypes';
 import { moviesListStyles } from './moviesListStyles';
 import MovieListCard from '../../components/MoviesListCard';
+import CustomBottomTab from '../../components/CustomBottomTab';
 
 type Props = {
     moviesList: Movie[];
@@ -11,12 +12,17 @@ type Props = {
 };
 
 const MoviesListUi: React.FC<Props> = ({ moviesList, navigation }) => {
+    const handleSearch = () => {
+        navigation.navigate('SearchScreen')
+    }
     return (
         <SafeAreaView style={moviesListStyles.container}>
             <View style={moviesListStyles.headerContainer}>
                 <Text style={moviesListStyles.header}>Watch</Text>
-                <TouchableOpacity>
-                    <AntDesign name="search1" color={"black"} size={25} />
+                <TouchableOpacity
+                    onPress={handleSearch}
+                >
+                    <AntDesign name="search1" color={"black"} size={20} />
                 </TouchableOpacity>
             </View>
             <FlatList
@@ -24,6 +30,7 @@ const MoviesListUi: React.FC<Props> = ({ moviesList, navigation }) => {
                 renderItem={({ item }) => <MovieListCard item={item} navigation={navigation} />}
                 keyExtractor={(item) => item.id.toString()}
             />
+            <CustomBottomTab />
         </SafeAreaView>
     );
 };

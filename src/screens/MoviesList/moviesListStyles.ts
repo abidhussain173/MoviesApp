@@ -13,8 +13,9 @@ export const moviesListStyles = StyleSheet.create({
         paddingTop: 20,
     },
     header: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 16,
+        fontWeight: '500',
+        color: 'rgba(32, 44, 67, 1)',
         marginBottom: 16,
     },
     imgCard: {
